@@ -1,0 +1,25 @@
+{
+  "name": "com.fisipgroup.cloudsave",
+  "version": "1.0.0",
+  "displayName": "FisipGroup CloudSave",
+  "description": "This custom package contains several scripts to help on the development of FisipGroup projects with the CloudSave Package.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "",
+  "changelogUrl": "https://github.com/JoaoSantosFisip/fisipgroup-custom-package-tools/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/JoaoSantosFisip/fisipgroup-custom-package-tools/blob/main/LICENSE.md",
+  "keywords": [
+    "tools",
+    "fisipgroup"
+  ],
+  "author": {
+    "name": "FisipGroup",
+    "email": "joao@fisipgroup.com",
+    "url": "https://github.com/JoaoSantosFisip"
+  },
+  "dependencies": {
+    "com.unity.services.core": "1.12.5",
+    "com.unity.services.authentication": "3.3.1",
+    "com.unity.services.cloudsave": "3.2.0"
+  }
+}

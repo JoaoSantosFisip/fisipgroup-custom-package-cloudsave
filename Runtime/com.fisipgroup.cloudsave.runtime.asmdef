@@ -1,0 +1,17 @@
+{
+    "name": "com.fisipgroup.cloudsave.runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:be0d2672886cc45b2bcea5a5053a5347",
+        "GUID:5540e30183c82e84b954c033c388e06c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
