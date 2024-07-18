@@ -7,6 +7,7 @@ using Unity.Services.CloudSave;
 using Unity.Services.CloudSave.Models;
 using Unity.Services.Authentication;
 using System.Threading;
+using UnityEngine.Events;
 
 namespace FisipGroup.CustomPackage.CloudSave
 {
@@ -18,15 +19,22 @@ namespace FisipGroup.CustomPackage.CloudSave
         private static readonly int RetryWaitTime = 1000; //In miliseconds
         private static readonly string ConnectionErrorMessage = "The request to the Cloud Save service failed - make sure you're connected to an internet connection and try again.";
 
+        public static UnityEvent OnRequestStart = new();
+        public static UnityEvent OnRequestFinish = new();
+
         /// <summary>
         /// Clears all the player's data.
         /// </summary>
         /// <param name="callback"></param>
         public static async void ClearData(Action<bool> callback)
         {
+            OnRequestStart?.Invoke();
+
             if (!AuthenticationService.Instance.IsSignedIn)
             {
                 Debug.LogError("CloudSaveManager.cs: Can't clear data because the player is not logged in.");
+
+                OnRequestFinish?.Invoke();
 
                 callback?.Invoke(false);
 
@@ -38,7 +46,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 await CloudSaveService.Instance.Data.Player.DeleteAllAsync();
         
                 Debug.Log("<color=#12a182>CloudSaveManager.cs: User data cleared successfully.</color>");
-        
+
+                OnRequestFinish?.Invoke();
+
                 callback?.Invoke(true);
             }
             catch (Exception ex)
@@ -55,6 +65,8 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogError("CloudSaveManager.cs: Error deleting user data: " + ex.Message);
 
+                    OnRequestFinish?.Invoke();
+
                     callback?.Invoke(false);
                 }
             }
@@ -66,9 +78,13 @@ namespace FisipGroup.CustomPackage.CloudSave
         /// <param name="callback"></param>
         public static async void RetrieveSpecificData<T>(string key, Action<bool, T> callback)
         {
+            OnRequestStart?.Invoke();
+
             if (!AuthenticationService.Instance.IsSignedIn)
             {
                 Debug.LogError("CloudSaveManager.cs: Can't retrieve specific data because the player is not logged in.");
+
+                OnRequestFinish?.Invoke();
 
                 callback?.Invoke(false, default);
 
@@ -83,11 +99,15 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.Log("<color=#12a182>CloudSaveManager.cs: Specific data retrieved successfully.</color>");
 
+                    OnRequestFinish?.Invoke();
+
                     callback?.Invoke(true, item.Value.GetAs<T>());
                 }
                 else
                 {
                     Debug.Log("<color=#12a182>CloudSaveManager.cs: There is no such key as " + key + "!</color>");
+
+                    OnRequestFinish?.Invoke();
 
                     callback?.Invoke(false, default);
                 }
@@ -107,6 +127,8 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogError("CloudSaveManager.cs: Error retrieving specific data: " + ex.Message);
 
+                    OnRequestFinish?.Invoke();
+
                     callback?.Invoke(false, default);
                 }
             }
@@ -117,9 +139,13 @@ namespace FisipGroup.CustomPackage.CloudSave
         /// <param name="callback"></param>
         public static async void RetrieveAllData(Action<bool, Dictionary<string, Item>> callback)
         {
+            OnRequestStart?.Invoke();
+
             if (!AuthenticationService.Instance.IsSignedIn)
             {
                 Debug.LogError("CloudSaveManager.cs: Can't retrieve all of player's data because the player is not logged in.");
+
+                OnRequestFinish?.Invoke();
 
                 callback?.Invoke(false, null);
 
@@ -131,7 +157,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 var allData = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
         
                 Debug.Log("<color=#12a182>CloudSaveManager.cs: All data loaded successfully.</color>");
-        
+
+                OnRequestFinish?.Invoke();
+
                 callback?.Invoke(true, allData);
             }
             catch (Exception ex)
@@ -149,6 +177,8 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogError("CloudSaveManager.cs: Error loading all data: " + ex.Message);
 
+                    OnRequestFinish?.Invoke();
+
                     callback?.Invoke(false, null);
                 }
             }
@@ -162,9 +192,13 @@ namespace FisipGroup.CustomPackage.CloudSave
         /// <param name="callback"></param>
         public static async void SaveSpecificData<T>(string key, T data, Action<bool> callback)
         {
+            OnRequestStart?.Invoke();
+
             if (!AuthenticationService.Instance.IsSignedIn)
             {
                 Debug.LogError("CloudSaveManager.cs: Can't save specific data because the player is not logged in.");
+
+                OnRequestFinish?.Invoke();
 
                 callback?.Invoke(false);
 
@@ -176,7 +210,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 await CloudSaveService.Instance.Data.Player.SaveAsync(new Dictionary<string, object> { { key, data } });
         
                 Debug.Log("<color=#12a182>CloudSaveManager.cs: " + key + " data saved successfully.</color>");
-        
+
+                OnRequestFinish?.Invoke();
+
                 callback?.Invoke(true);
             }
             catch (Exception ex)
@@ -192,6 +228,8 @@ namespace FisipGroup.CustomPackage.CloudSave
                 else
                 {
                     Debug.LogError("CloudSaveManager.cs: Error saving data: " + key + " - " + ex.Message);
+
+                    OnRequestFinish?.Invoke();
 
                     callback?.Invoke(false);
                 }

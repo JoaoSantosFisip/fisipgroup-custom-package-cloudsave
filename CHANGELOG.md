@@ -1,5 +1,8 @@
 All notable changes to this project will be documented in this file.
 
+[1.0.4] - 2024-07-18
+ - Added screen blocker.
+
 [1.0.3] - 2024-07-18
  - Changed to Thread.Sleep.
 
