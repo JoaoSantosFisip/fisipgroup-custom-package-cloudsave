@@ -6,7 +6,7 @@ using UnityEngine;
 using Unity.Services.CloudSave;
 using Unity.Services.CloudSave.Models;
 using Unity.Services.Authentication;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace FisipGroup.CustomPackage.CloudSave
 {
@@ -15,7 +15,7 @@ namespace FisipGroup.CustomPackage.CloudSave
     /// </summary>
     public static class CloudSaveManager
     {
-        private static readonly int RetryWaitTime = 1; //In seconds
+        private static readonly int RetryWaitTime = 1000; //In miliseconds
         private static readonly string ConnectionErrorMessage = "The request to the Cloud Save service failed - make sure you're connected to an internet connection and try again.";
 
         /// <summary>
@@ -47,7 +47,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error deleting user data: " + ex.Message);
 
-                    await Task.Delay(new TimeSpan(0, 0, RetryWaitTime)).ContinueWith(o => { ClearData(callback); });
+                    Thread.Sleep(RetryWaitTime);
+
+                    ClearData(callback);
                 }
                 else
                 {
@@ -97,7 +99,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error retrieving specific data: " + ex.Message);
 
-                    await Task.Delay(new TimeSpan(0, 0, RetryWaitTime)).ContinueWith(o => { RetrieveSpecificData(key, callback); });
+                    Thread.Sleep(RetryWaitTime);
+
+                    RetrieveSpecificData(key, callback);
                 }
                 else
                 {
@@ -137,7 +141,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error loading all data: " + ex.Message);
 
-                    await Task.Delay(new TimeSpan(0, 0, RetryWaitTime)).ContinueWith(o => { RetrieveAllData(callback); });
+                    Thread.Sleep(RetryWaitTime);
+
+                    RetrieveAllData(callback);
                 }
                 else
                 {
@@ -179,7 +185,9 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error saving data: " + ex.Message);
 
-                    await Task.Delay(new TimeSpan(0, 0, RetryWaitTime)).ContinueWith(o => { SaveSpecificData(key, data, callback); });
+                    Thread.Sleep(RetryWaitTime);
+
+                    SaveSpecificData(key, data, callback);
                 }
                 else
                 {
