@@ -1,5 +1,8 @@
 All notable changes to this project will be documented in this file.
 
+[1.0.2] - 2024-07-18
+ - Added Task.Delay on connection errors.
+
 [1.0.1] - 2024-06-12
  - Added links for license and changelog.
 
