@@ -23,7 +23,7 @@ namespace FisipGroup.CustomPackage.CloudSave
 
                 var animator = _loadingIconGO.GetComponent<Animator>();
                 animator.SetTrigger(info.loadingIconAnimationType.ToString());
-                animator.speed = info.loadingIconAnimationSpeed;
+                animator.SetFloat("Speed", info.loadingIconAnimationSpeed);
             }
         }
     }
