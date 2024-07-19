@@ -1,5 +1,8 @@
 All notable changes to this project will be documented in this file.
 
+[1.0.9] - 2024-07-19
+ - Fixed editor assembly.
+
 [1.0.8] - 2024-07-19
  - Fixed animation speed to accept negative values.
 
