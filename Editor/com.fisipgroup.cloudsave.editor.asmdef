@@ -1,0 +1,18 @@
+{
+    "name": "com.fisipgroup.cloudsave.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:29c41e6e8c7b0ee4cab7ebf30ba18345",
+        "GUID:6042a9115913bd747a97949ea436c37a",
+        "GUID:68b4854962cf7a64e9fd69f6b1230799"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
