@@ -88,6 +88,11 @@ namespace FisipGroup.CustomPackage.CloudSave
             {
                 var newInfoFile = (CloudSaveSettingsScriptableObject)CreateInstance(typeof(CloudSaveSettingsScriptableObject));
                 newInfoFile.enableScreenBlocker = Info.enableScreenBlocker;
+                newInfoFile.enableLoadingIcon = Info.enableLoadingIcon;
+                newInfoFile.loadingIconSprite = Info.loadingIconSprite;
+                newInfoFile.loadingIconColor = Info.loadingIconColor;
+                newInfoFile.loadingIconAnimationType = Info.loadingIconAnimationType;
+                newInfoFile.loadingIconAnimationSpeed = Info.loadingIconAnimationSpeed;
 
                 Info = HelperCustomPackage.SaveFileChanges(newInfoFile, PackageName) as CloudSaveSettingsScriptableObject;
             }
