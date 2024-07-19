@@ -14,7 +14,7 @@ namespace FisipGroup.CustomPackage.CloudSave
 
         private static readonly string PackageName = "CloudSave";
 
-        [MenuItem("Fisipgroup/CloudSave")]
+        [MenuItem("FisipGroup/CloudSave")]
         private static void ShowWindow()
         {
             HelperCustomPackage.CreateResourcesFolders(PackageName);
