@@ -1,6 +1,6 @@
 {
   "name": "com.fisipgroup.cloudsave",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "displayName": "FisipGroup CloudSave",
   "description": "This custom package contains several scripts to help on the development of FisipGroup projects with the CloudSave Package.",
   "unity": "2019.1",
@@ -20,6 +20,7 @@
   "dependencies": {
     "com.unity.services.core": "1.12.5",
     "com.unity.services.authentication": "3.3.1",
-    "com.unity.services.cloudsave": "3.2.0"
+    "com.unity.services.cloudsave": "3.2.0",
+    "com.fisipgroup.tools": "1.0.9"
   }
 }
