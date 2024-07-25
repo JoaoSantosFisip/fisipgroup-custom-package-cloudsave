@@ -1,5 +1,9 @@
 All notable changes to this project will be documented in this file.
 
+[1.0.10] - 2024-07-25
+ - Changed script icons.
+ - Used await Task.Delay instead of Thread.Sleep.
+
 [1.0.9] - 2024-07-19
  - Fixed editor assembly.
 

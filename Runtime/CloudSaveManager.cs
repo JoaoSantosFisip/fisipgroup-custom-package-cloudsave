@@ -1,13 +1,11 @@
-// Ignore Spelling: Fisip
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Services.CloudSave;
 using Unity.Services.CloudSave.Models;
 using Unity.Services.Authentication;
-using System.Threading;
 using UnityEngine.Events;
+using System.Threading.Tasks;
 
 namespace FisipGroup.CustomPackage.CloudSave
 {
@@ -57,7 +55,7 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error deleting user data: " + ex.Message);
 
-                    Thread.Sleep(RetryWaitTime);
+                    await Task.Delay(RetryWaitTime);
 
                     ClearData(callback);
                 }
@@ -119,7 +117,7 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error retrieving specific data: " + ex.Message);
 
-                    Thread.Sleep(RetryWaitTime);
+                    await Task.Delay(RetryWaitTime);
 
                     RetrieveSpecificData(key, callback);
                 }
@@ -169,7 +167,7 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error loading all data: " + ex.Message);
 
-                    Thread.Sleep(RetryWaitTime);
+                    await Task.Delay(RetryWaitTime);
 
                     RetrieveAllData(callback);
                 }
@@ -221,7 +219,7 @@ namespace FisipGroup.CustomPackage.CloudSave
                 {
                     Debug.LogWarning("CloudSaveManager.cs: Connection error saving data: " + ex.Message);
 
-                    Thread.Sleep(RetryWaitTime);
+                    await Task.Delay(RetryWaitTime);
 
                     SaveSpecificData(key, data, callback);
                 }
